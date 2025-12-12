@@ -23,14 +23,33 @@ the same terms as the Perl 5 programming language system itself.
 use Test2::V0;
 
 my @modules = qw(
+	B
+	B::Hooks::AtRuntime
 	Carp
+	Class::Method::Modifiers
+	Class::XSAccessor
+	Class::XSConstructor
+	Exporter::Tiny
+	Lexical::Sub
+	List::Util
+	Module::Runtime
+	Role::Tiny
+	Scalar::Util
+	Sub::HandlesVia
+	Sub::Accessor::Small
 	Test2::V0
+	Type::Tiny
+	Type::Tiny::XS
+	constant
+	mro::compat
+	strict
+	warnings
 );
 
 diag "\n####";
 for my $mod ( sort @modules ) {
 	eval "require $mod;";
-	diag sprintf( '%-20s %s', $mod, $mod->VERSION );
+	diag sprintf( '%-26s %s', $mod, eval { $mod->VERSION } // '-' );
 }
 diag "####";
 

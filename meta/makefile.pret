@@ -3,7 +3,19 @@
 @prefix : <http://ontologi.es/doap-deps#>.
 
 `Marlin`
-	:runtime-requirement    [ :on "perl 5.010001"^^:CpanId ];
+	:runtime-requirement    [ :on "perl 5.008008"^^:CpanId ];
+	:runtime-requirement    [ :on "B::Hooks::AtRuntime"^^:CpanId ];
+	:runtime-requirement    [ :on "Class::Method::Modifiers"^^:CpanId ];
+	:runtime-requirement    [ :on "Class::XSAccessor 1.19"^^:CpanId ];
+	:runtime-requirement    [ :on "Class::XSConstructor 0.010"^^:CpanId ];
+	:runtime-requirement    [ :on "Exporter::Tiny 1.006002"^^:CpanId ];
+	:runtime-requirement    [ :on "List::Util 1.33"^^:CpanId ];
+	:runtime-requirement    [ :on "Module::Runtime"^^:CpanId ];
+	:runtime-requirement    [ :on "Role::Tiny"^^:CpanId ];
+	:runtime-requirement    [ :on "Type::Tiny 2.008000"^^:CpanId ];
+	:runtime-requirement    [ :on "Type::Tiny::XS"^^:CpanId ];
+	:runtime-requirement    [ :on "Sub::HandlesVia 0.052000"^^:CpanId ];
+	:runtime-requirement    [ :on "Sub::Accessor::Small 1.000000"^^:CpanId ];
 	:test-requirement       [ :on "Test2::V0"^^:CpanId ];
 	:test-requirement       [ :on "Test2::Tools::Spec"^^:CpanId ];
 	:test-requirement       [ :on "Test2::Require::AuthorTesting"^^:CpanId ];
