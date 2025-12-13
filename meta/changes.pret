@@ -4,3 +4,8 @@
 	issued  2025-12-12;
 	label   "Initial release".
 
+`Marlin 0.001001 cpan:TOBYINK`
+	issued  2025-12-13;
+	changeset [
+		item "Include Class::Tiny in examples/benchmark."^^Documentation;
+	].
