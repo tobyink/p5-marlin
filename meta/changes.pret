@@ -22,3 +22,9 @@
 		item "Minor pod fix."^^Documentation;
 	].
 
+`Marlin 0.002002 cpan:TOBYINK`
+	issued  2025-12-13;
+	changeset [
+		item "Minor pod fix."^^Documentation;
+	].
+
