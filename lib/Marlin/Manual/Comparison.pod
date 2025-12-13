@@ -28,7 +28,9 @@ Here's a simple example of some classes and roles in L<Moo>:
   }
   
   package Local::Example::Moo::DoesIntro {
-    use Marlin::Role -requires => [ 'name' ];
+    use Moo::Role;
+    
+    requires 'name';
     
     sub introduction ( $self ) {
       return sprintf( "Hi, my name is %s!", $self->name );
@@ -354,9 +356,7 @@ should allow.
   }
   
   package Local::Example::Marlin::DoesIntro {
-    use Role::Tiny;
-    
-    requires 'name';
+    use Marlin::Role -requires => [ 'name' ];
     
     sub introduction ( $self ) {
       return sprintf( "Hi, my name is %s!", $self->name );
