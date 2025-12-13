@@ -5,7 +5,7 @@ use warnings;
 package Marlin::Attribute;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.002000';
+our $VERSION   = '0.002001';
 
 use parent 'Sub::Accessor::Small';
 use B ();
