@@ -17,6 +17,7 @@ eval 'require Local::Example::Plain;  1' or warn $@;
 eval 'require Local::Example::Marlin; 1' or warn $@;
 eval 'require Local::Example::Moo;    1' or warn $@;
 eval 'require Local::Example::Moose;  1' or warn $@;
+eval 'require Local::Example::Tiny;   1' or warn $@;
 
 my ( %constructors, %accessors, %delegations, %combined );
 for my $i ( @Local::Example::ALL ) {
@@ -88,33 +89,37 @@ say "";
 
 __END__
 [[ CONSTRUCTORS ]]
-         Rate  Plain  Moose    Moo Marlin   Core
-Plain  1101/s     --   -52%   -55%   -64%   -77%
-Moose  2274/s   107%     --    -6%   -26%   -52%
-Moo    2423/s   120%     7%     --   -21%   -49%
-Marlin 3061/s   178%    35%    26%     --   -35%
-Core   4741/s   331%   108%    96%    55%     --
+         Rate   Tiny  Plain    Moo  Moose Marlin   Core
+Tiny   1317/s     --    -2%   -48%   -53%   -54%   -72%
+Plain  1340/s     2%     --   -47%   -53%   -53%   -72%
+Moo    2527/s    92%    89%     --   -11%   -12%   -47%
+Moose  2828/s   115%   111%    12%     --    -2%   -40%
+Marlin 2873/s   118%   114%    14%     2%     --   -39%
+Core   4727/s   259%   253%    87%    67%    65%     --
 
 [[ ACCESSORS ]]
-          Rate   Core  Moose  Plain    Moo Marlin
-Core   16444/s     --    -9%   -11%   -43%   -50%
-Moose  18056/s    10%     --    -3%   -38%   -45%
-Plain  18561/s    13%     3%     --   -36%   -44%
-Moo    29074/s    77%    61%    57%     --   -12%
-Marlin 33091/s   101%    83%    78%    14%     --
+          Rate   Tiny  Moose  Plain   Core    Moo Marlin
+Tiny   17345/s     --    -1%    -3%    -7%   -36%   -45%
+Moose  17602/s     1%     --    -2%    -6%   -35%   -44%
+Plain  17893/s     3%     2%     --    -4%   -34%   -44%
+Core   18732/s     8%     6%     5%     --   -31%   -41%
+Moo    27226/s    57%    55%    52%    45%     --   -14%
+Marlin 31688/s    83%    80%    77%    69%    16%     --
 
 [[ DELEGATIONS ]]
-         Rate  Plain   Core  Moose    Moo Marlin
-Plain  1597/s     --    -2%    -9%   -10%   -16%
-Core   1622/s     2%     --    -7%    -9%   -15%
-Moose  1746/s     9%     8%     --    -2%    -8%
-Moo    1779/s    11%    10%     2%     --    -7%
-Marlin 1907/s    19%    18%     9%     7%     --
+         Rate   Tiny   Core  Plain  Moose    Moo Marlin
+Tiny    675/s     --   -56%   -57%   -59%   -61%   -61%
+Core   1518/s   125%     --    -4%    -8%   -13%   -13%
+Plain  1581/s   134%     4%     --    -4%    -9%   -10%
+Moose  1642/s   143%     8%     4%     --    -5%    -6%
+Moo    1736/s   157%    14%    10%     6%     --    -1%
+Marlin 1752/s   160%    15%    11%     7%     1%     --
 
 [[ COMBINED ]]
-         Rate  Plain   Core  Moose    Moo Marlin
-Plain  1143/s     --   -17%   -17%   -21%   -27%
-Core   1374/s    20%     --    -1%    -5%   -12%
-Moose  1381/s    21%     1%     --    -4%   -12%
-Moo    1441/s    26%     5%     4%     --    -8%
-Marlin 1562/s    37%    14%    13%     8%     --
+         Rate   Tiny  Plain   Core  Moose    Moo Marlin
+Tiny    545/s     --   -48%   -56%   -58%   -60%   -64%
+Plain  1051/s    93%     --   -16%   -19%   -22%   -31%
+Core   1249/s   129%    19%     --    -4%    -8%   -18%
+Moose  1304/s   139%    24%     4%     --    -4%   -14%
+Moo    1355/s   148%    29%     8%     4%     --   -11%
+Marlin 1519/s   179%    45%    22%    17%    12%     --

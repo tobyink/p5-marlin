@@ -13,6 +13,7 @@ eval 'require Local::Example::Plain;  1' or warn $@;
 eval 'require Local::Example::Marlin; 1' or warn $@;
 eval 'require Local::Example::Moo;    1' or warn $@;
 eval 'require Local::Example::Moose;  1' or warn $@;
+eval 'require Local::Example::Tiny;   1' or warn $@;
 
 for my $i ( @Local::Example::ALL ) {
 	
@@ -60,11 +61,6 @@ for my $i ( @Local::Example::ALL ) {
 			ok( dies { $class->new( employee_id => 1 ) }, 'constructor dies when missing required parameters' );
 			ok( dies { $class->new( name => [], employee_id => 1 ) }, 'constructor dies when given wrong typed parameters' );
 			ok( dies { $class->new( name => 'Bob', employee_id => 1, other => 1 ) }, 'constructor dies when given extra parameters' );
-			
-			diag $class;
-			for my $method ( qw/ new name age has_age employee_id / ) {
-				diag sprintf( "% 24s : %s", $method, is_xs "$class\::$method" );
-			}
 		};
 		
 		subtest 'Employee::Developer' => sub {
@@ -88,11 +84,6 @@ for my $i ( @Local::Example::ALL ) {
 			ok( dies { $class->new( name => [], employee_id => 1 ) }, 'constructor dies when given wrong typed parameters' );
 			ok( dies { $class->new( name => 'Bob', employee_id => 1, other => 1 ) }, 'constructor dies when given extra parameters' );
 			ok( dies { $class->new( name => 'Bob', employee_id => 1, _languages => 1 ) }, 'constructor dies when given non-parameter attributes' );
-			
-			diag $class;
-			for my $method ( qw/ new name age has_age employee_id get_languages all_languages add_language / ) {
-				diag sprintf( "% 24s : %s", $method, is_xs "$class\::$method" );
-			}
 		};
 	};
 }
