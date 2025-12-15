@@ -209,7 +209,8 @@ sub setup_steps {
 sub mark_inc {
 	my $me = shift;
 	
-	$INC{module_notional_filename($me->this)} //= __FILE__;
+	my $file = module_notional_filename($me->this);
+	$INC{$file} = __FILE__ unless defined $file;
 	
 	return $me;
 }
