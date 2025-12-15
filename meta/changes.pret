@@ -28,3 +28,9 @@
 		item "Minor pod fix."^^Documentation;
 	].
 
+`Marlin 0.002003 cpan:TOBYINK`
+	issued  2025-12-15;
+	changeset [
+		item "Fix case of MRO::Compat dependency on Perl older than v5.10.0."^^Bugfix;
+	].
+
