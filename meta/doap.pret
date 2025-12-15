@@ -4,7 +4,7 @@
 
 `Marlin`
 	:programming-language "Perl" ;
-	:shortdesc            "pretty fast class builder with most Moo/Moose features";
+	:shortdesc            "🐟 pretty fast class builder with most Moo/Moose features 🐟";
 	:homepage             <https://metacpan.org/release/Marlin>;
 	:download-page        <https://metacpan.org/release/Marlin>;
 	:bug-database         <https://github.com/tobyink/p5-marlin/issues>;
