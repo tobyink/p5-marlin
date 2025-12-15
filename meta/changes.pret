@@ -40,3 +40,9 @@
 		item "Remove usage of // operator."^^Bugfix;
 	].
 
+`Marlin 0.002005 cpan:TOBYINK`
+	issued  2025-12-15;
+	changeset [
+		item "Remove usage of // operator from test case too."^^Bugfix;
+	].
+
