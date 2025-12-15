@@ -19,7 +19,7 @@ use List::Util qw(any);
 
 BEGIN {
 	if ( $] < 5.010 ) {
-		require mro::compat;
+		require MRO::Compat;
 	}
 };
 

@@ -3,5 +3,5 @@
 	}
 	
 	if ( "$]" < 5.010000 ) {
-		$meta->{prereqs}{runtime}{'requires'}{'mro::compat'} = 0;
+		$meta->{prereqs}{runtime}{'requires'}{'MRO::Compat'} = 0;
 	}
