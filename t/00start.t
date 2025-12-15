@@ -33,6 +33,7 @@ my @modules = qw(
 	Lexical::Sub
 	List::Util
 	Module::Runtime
+	MRO::Compat
 	Role::Tiny
 	Scalar::Util
 	Sub::HandlesVia
@@ -41,7 +42,6 @@ my @modules = qw(
 	Type::Tiny
 	Type::Tiny::XS
 	constant
-	mro::compat
 	strict
 	warnings
 );
