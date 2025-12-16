@@ -49,6 +49,14 @@
 `Marlin 0.003000 cpan:TOBYINK`
 	issued  2025-12-15;
 	changeset [
-		item "Use a newer version of Class::XSAccessor which allows for type coercion and defaults/builders to run in the constructor."^^Change;
+		item "Use a newer version of Class::XSConstructor which allows for type coercion and defaults/builders to run in the constructor."^^Change;
 	].
+
+`Marlin 0.003001 cpan:TOBYINK`
+	issued  2025-12-16;
+	changeset [
+		item "Use a newer version of Class::XSConstructor with fixes for BUILD methods."^^Change;
+		item "Use a newer version of Sub::Accessor::Small with fixes for builder methods."^^Change;
+	].
+
 
