@@ -6,7 +6,7 @@ use utf8;
 package Marlin;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.003001';
+our $VERSION   = '0.004000';
 
 use constant _ATTRS => qw( this parents roles attributes strict constructor modifiers );
 use Exporter::Tiny qw( mkopt _croak );

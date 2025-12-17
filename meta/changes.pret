@@ -59,4 +59,9 @@
 		item "Use a newer version of Sub::Accessor::Small with fixes for builder methods."^^Change;
 	].
 
-
+`Marlin 0.004000 cpan:TOBYINK`
+	issued  2025-12-17;
+	changeset [
+		item "Allow attribute declarations to tweak how the attribute will be stored, including allowing inside-out attributes."^^Addition;
+		item "Implement constant attributes."^^Addition;
+	].
