@@ -6,7 +6,7 @@ use utf8;
 package Marlin;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.005000';
+our $VERSION   = '0.006000';
 
 use constant _ATTRS => qw( this parents roles attributes strict constructor modifiers );
 use Exporter::Tiny qw( mkopt _croak );
@@ -695,8 +695,8 @@ use a combination of C<< init_arg => undef >> and a strict constructor.
 The name of the parameter passed to the constructor which will be used
 to populate this attribute.
 
-Setting to an explicit C<undef> prevents constructor from even knowing
-this attribute exists. (It may still have accessors, lazy defaults, etc.)
+Setting to an explicit C<undef> prevents the constructor from initializing
+the attribute from the arguments passed to it.
 
 =item C<< reader >>
 
@@ -792,10 +792,10 @@ If you choose C<lazy>, then the default or builder will be run when the
 value of the attribute is first needed. Otherwise it will be run in the
 constructor.
 
-Currently if your class has any non-lazy builders/defaults, this will force
-the constructor to be implemented in Perl instead of XS. If you use lazy
-builders/defaults, the constructor may use XS, but the readers/accessors for
-the affected attributes will be implemented in Perl.
+If you use lazy builders/defaults, readers/accessors for the affected
+attributes will be implemented in Perl rather than XS. This is a good
+reason to have separate methods for readers and writers, so that the
+reader can remain fast!
 
 =item C<< constant >>
 
@@ -862,9 +862,10 @@ the trigger.
       };
   }
 
-Currently if your class has any triggers, this will force the constructor
-plus the writers/accessors for the affected attributes to be implemented
-in Perl instead of XS.
+Currently if your class has any triggers, this will force any writers/accessors
+for the affected attributes to be implemented in Perl instead of XS. This is
+a good reason to have separate methods for readers and writers, so that the
+reader can remain fast!
 
 It is usually possible to design your API in ways that don't require
 triggers.
@@ -947,9 +948,8 @@ Lexical methods are possible here too.
 
 A type constraint for an attribute.
 
-Type checks do not force your constructor to be implemented in Perl, but
-type coercions do. Any type checks or coercions will force the accessors
-and writers for those attributes to be implemented in Perl.
+Any type checks or coercions will force the accessors and writers for those
+attributes to be implemented in Perl instead of XS.
 
 You can use C<< isa => sub { ... } >> like Moo.
 
