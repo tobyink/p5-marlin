@@ -130,10 +130,6 @@ sub inline_access_w {
 
 sub requires_pp_constructor {
 	my $me = shift;
-	return !!0 if !defined $me->{init_arg};
-	return !!1 if $me->{init_arg} ne $me->{slot};
-	return !!1 if $me->{weak_ref};
-	return !!1 if exists $me->{trigger};
 	return !!1 unless $me->{storage} eq 'NONE' || $me->{storage} eq 'HASH';
 	return !!0;
 }
