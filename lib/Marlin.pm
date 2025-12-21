@@ -514,7 +514,7 @@ sub make_type_constraint {
 	my $tc = Marlin::TypeConstraint->new( name => $name, class => $me->this );
 	$tc->{_marlin} = $me;
 	Scalar::Util::weaken( $tc->{_marlin} );
-	return $tc; 
+	return $tc;
 }
 
 1;
