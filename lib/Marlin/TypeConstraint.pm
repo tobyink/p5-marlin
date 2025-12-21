@@ -5,7 +5,7 @@ use warnings;
 package Marlin::TypeConstraint;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.006001';
+our $VERSION   = '0.007000';
 
 use parent 'Type::Tiny::Class';
 use Types::Common qw( signature Any Optional ArrayRef is_TypeTiny assert_ArrayRef );

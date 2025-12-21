@@ -86,3 +86,10 @@
 		item "Use a newer version of Class::XSConstructor which fixes broken test case."^^Change;
 		item "Restore test case which was marked TODO."^^Tests;
 	].
+
+`Marlin 0.007000 cpan:TOBYINK`
+	issued  2025-12-21;
+	changeset [
+		item "Marlin::Struct."^^Addition;
+		item "Make strict constructors the default."^^Change;
+	].
