@@ -10,7 +10,7 @@ our $VERSION   = '0.006001';
 
 use constant _ATTRS => qw( this parents roles attributes strict constructor modifiers );
 use Exporter::Tiny qw( mkopt _croak );
-use Scalar::Util qw( blessed );
+use Scalar::Util qw( blessed weaken );
 use Class::XSAccessor { getters => [ _ATTRS ] };
 use Class::XSConstructor [ undef, '_new' ], _ATTRS;
 use Class::XSDestructor;
@@ -505,6 +505,16 @@ sub build_pp_constructor {
 	$code->decrease_indent;
 	$code->add_line( '}' );
 	return $code;
+}
+
+sub make_type_constraint {
+	my $me = shift;
+	my $name = shift;
+	require Marlin::TypeConstraint;
+	my $tc = Marlin::TypeConstraint->new( name => $name, class => $me->this );
+	$tc->{_marlin} = $me;
+	Scalar::Util::weaken( $tc->{_marlin} );
+	return $tc; 
 }
 
 1;
@@ -1164,6 +1174,7 @@ L<https://github.com/tobyink/p5-marlin/issues>.
 =head1 SEE ALSO
 
 L<Marlin::Role>,
+L<Marlin::Struct>,
 L<Marlin::Util>,
 L<Marlin::Manual::Principles>,
 L<Marlin::Manual::Comparison>.
