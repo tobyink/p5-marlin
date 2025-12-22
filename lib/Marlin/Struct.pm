@@ -6,7 +6,7 @@ use utf8;
 package Marlin::Struct;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.007000';
+our $VERSION   = '0.007001';
 
 use Marlin ();
 
@@ -48,8 +48,7 @@ sub import {
 			}
 			else {
 				no strict 'refs';
-				my $package = $marlin->this;
-				*{ $package . '::' . $e->{name} } = $e->{code};
+				*{ $caller . '::' . $e->{name} } = $e->{code};
 			}
 		}
 	}
