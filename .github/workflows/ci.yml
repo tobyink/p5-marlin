@@ -115,6 +115,7 @@ jobs:
           perl -v
       - name: Install dependencies
         run: |
+          cpanm -n 'https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Test-Deep-1.130.tar.gz'
           cpanm -n App::GhaProve
           cpanm -n --installdeps ./build
       - name: Install extra dependencies
