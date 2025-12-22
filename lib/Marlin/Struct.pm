@@ -48,7 +48,7 @@ sub import {
 			}
 			else {
 				no strict 'refs';
-				my $package = $me->this;
+				my $package = $marlin->this;
 				*{ $package . '::' . $e->{name} } = $e->{code};
 			}
 		}
