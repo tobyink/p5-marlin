@@ -23,8 +23,8 @@ sub import {
 		my $class_name = sprintf '%s::__ANON__::_%06d', $me, ++$uniq_id;
 		
 		my $marlin = Marlin->new(
-			-caller => \$caller,
-			-this   => \$class_name,
+			'-caller' => \$caller,
+			'-this'   => \$class_name,
 			@$definition,
 		);
 		$marlin->{_caller} = $caller;
