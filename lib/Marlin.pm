@@ -722,15 +722,16 @@ sub to_arrayref {
 	my $me = shift;
 	my $object = shift;
 	
+	my $is_struct = $me->is_struct;
 	my @pos;
 	my @named;
 	
 	for my $attr ( @{ $me->attributes_with_inheritance } ) {
-		my $storage    = ( $attr->{storage} ||= 'HASH' );
+		my $storage    = ( $attr->{storage} ||= 'HASH' ); next if $storage eq 'PRIVATE';
 		my $has_value  = $storage eq 'HASH' ? exists($object->{$attr->{slot}}) : $attr->predicate->($object);
 		my $value      = !$has_value ? undef : $storage eq 'HASH' ? $object->{$attr->{slot}} : $attr->reader->($object);
 		
-		if ( $attr->{required} ) {
+		if ( $is_struct and $attr->{required} ) {
 			push @pos, $value;
 		}
 		elsif ( $has_value ) {
@@ -792,31 +793,32 @@ sub _stringify_value {
 }
 
 sub to_string {
-	my $marlin = shift;
+	my $me = shift;
 	my $object = shift;
 	
+	my $is_struct = $me->is_struct;
 	my @pos;
 	my @named;
 	
-	for my $attr ( @{ $marlin->attributes_with_inheritance } ) {
-		my $storage    = ( $attr->{storage} ||= 'HASH' );
+	for my $attr ( @{ $me->attributes_with_inheritance } ) {
+		my $storage    = ( $attr->{storage} ||= 'HASH' ); next if $storage eq 'PRIVATE';
 		my $has_value  = $storage eq 'HASH' ? exists($object->{$attr->{slot}}) : $attr->predicate->($object);
 		my $value      = !$has_value ? undef : $storage eq 'HASH' ? $object->{$attr->{slot}} : $attr->reader->($object);
 		
-		if ( $attr->{required} ) {
-			push @pos, $marlin->_stringify_value($attr, $value);
+		if ( $is_struct and $attr->{required} ) {
+			push @pos, $me->_stringify_value($attr, $value);
 		}
 		elsif ( $has_value ) {
 			push @named, [
 				( $attr->{slot} =~ /\A[^\W0-9][\w]*\z/ ) ? $attr->{slot} : B::perlstring($attr->{slot}),
-				$marlin->_stringify_value($attr, $value),
+				$me->_stringify_value($attr, $value),
 			];
 		}
 	}
 	
 	return sprintf(
 		'%s[%s%s%s]',
-		$marlin->short_name || 'Object',
+		$me->short_name || 'Object',
 		join( q{, }, @pos ),
 		( @pos && @named ) ? q{, } : q{},
 		join( q{, }, map { sprintf q{%s => %s}, @$_ } @named ),
@@ -1491,6 +1493,100 @@ Marlin doesn't offer any official API for building extensions.
 =item *
 
 The metaobject protocol.
+
+=back
+
+=head2 API
+
+Marlin provides an API of sorts.
+
+=over
+
+=item C<< my $meta = Marlin->new( @args ) >>
+
+Creates an object representing a class, but doesn't build the class yet.
+
+=item C<< my $meta = Marlin->find_meta( $class_name ) >>
+
+Returns an object representing an existing class or role. Will automatically
+import Moose and Moo classes and roles too.
+
+=item C<< $meta->do_setup >>
+
+Builds the class.
+
+=item C<< $meta->caller >>
+
+Returns the name of the package which called Marlin.
+
+=item C<< $meta->this >>
+
+Returns the name of the class being built.
+
+=item C<< $meta->parents >>
+
+Returns an arrayref of parents. Each parent is itself an arrayref with the
+first element being the class name and the second element being a version
+number.
+
+=item C<< $meta->roles >>
+
+Returns an arrayref of roles. Each role is itself an arrayref with the
+first element being the class name and the second element being a version
+number.
+
+=item C<< $meta->attributes >>
+
+Returns an arrayref of attributes defined in this class. Includes attributes
+from composed roles, but not inherited attributes from parent classes.
+Each attribute is either a hashref or a L<Marlin::Attribute> object.
+
+Calling C<< $meta->canonicalize_attributes >> will replace any hashrefs
+in this list with Marlin::Attribute objects.
+
+=item C<< $meta->attributes_with_inheritance >>
+
+Like C<< $meta->attributes >>, but includes parent classes.
+
+=item C<< $meta->strict >>
+
+Boolean indicating if the constructor will be strict.
+
+=item C<< $meta->constructor >>
+
+Name of the constructor method. Usually "new".
+
+=item C<< $meta->modifiers >>
+
+Boolean indicating whether Marlin should export L<Class::Method::Modifiers>
+keywords into the package.
+
+=item C<< $meta->inhaled_from >>
+
+Usually undef, but may be "Moose", "Moose::Role", "Moo", or "Moo::Role" to
+indicate that this metadata was imported from Moose or Moo.
+
+=item C<< $meta->short_name >>
+
+The package name without any colons. This is used in the stringification
+provided by C<to_string>.
+
+=item C<< $meta->is_struct >>
+
+Boolean indicating that the class was created by L<Marlin::Struct>.
+
+=item C<< $meta->to_string( $object ) >>
+
+Stringifies the object to a representation useful in debugging, etc.
+
+=item C<< $meta->to_arrayref( $object ) >>
+
+Creates an arrayref representation of the object which closely resembles
+the string representation.
+
+=item C<< Marlin->can_lexical >>
+
+Returns true if Marlin is running in an environment that supports lexical subs.
 
 =back
 

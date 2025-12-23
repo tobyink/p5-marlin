@@ -217,6 +217,9 @@ mostly pretty sensible.
   my $point2 = ColourPoint[1, 2];
   say "$point2";  # ==> ColourPoint[1, 2, colour => "red"]
 
+Stringification and arrayrefification will skip any attributes that have their
+storage set to "PRIVATE".
+
 =head1 BUGS
 
 Please report any bugs to
