@@ -100,3 +100,16 @@
 		item "Get Marlin::Struct working on Perl older than 5.12.0."^^Bugfix;
 	].
 
+`Marlin 0.008000 cpan:TOBYINK`
+	issued  2025-12-23;
+	changeset [
+		item "Omit -strict from examples as that is now the default."^^Documentation;
+		item "Document API."^^Documentation;
+		item "Better documentation of Marlin::Struct."^^Documentation;
+		item "Marlin can now inherit from Moose and Moo classes and compose Moose and Moo roles."^^Change;
+		item "Internally use Clone::clone() instead of Storage::dclone() as it can cope with coderefs."^^Change;
+		item "Classes built with Marlin::Struct now provide a default stringification and arrayrefification."^^Change;
+		item "Various small improvements to Marlin::Struct."^^Change;
+		item "Provide some useful utility API methods."^^Change;
+	].
+
