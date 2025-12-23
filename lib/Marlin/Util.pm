@@ -98,6 +98,9 @@ Export these with C<< use Marlin::Util -bool >> or C<< use Marlin::Util -all >>.
 
 =back
 
+These are essentially the same as the C<true> and C<false> constants defined
+in the L<builtin> package.
+
 =head1 BUGS
 
 Please report any bugs to
