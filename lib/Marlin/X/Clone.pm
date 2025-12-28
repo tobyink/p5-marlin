@@ -4,6 +4,9 @@ use warnings;
 
 package Marlin::X::Clone;
 
+our $AUTHORITY = 'cpan:TOBYINK';
+our $VERSION   = '0.009000';
+
 use Carp 'croak';
 use Clone;
 use Eval::TypeTiny::CodeAccumulator;
@@ -19,6 +22,7 @@ use Marlin
 	strict_args => { isa => Bool,    default => !!1 },
 	;
 
+# Is possible to do some sanity checking here.
 sub BUILD {
 	my $plugin = shift;
 	if ( $plugin->marlin->isa('Marlin::Role') ) {
