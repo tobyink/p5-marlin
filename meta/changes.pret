@@ -113,3 +113,10 @@
 		item "Provide some useful utility API methods."^^Change;
 	].
 
+`Marlin 0.009000 cpan:TOBYINK`
+	issued  2025-12-28;
+	changeset [
+		item "Marlin now provides a rudimentary API for extension modules."^^Change;
+		item "Marlin::X::Clone is bundled as a demonstration of the extension API (and because it can be useful)."^^Addition;
+		item "Stop using `mkopt` to parse parameters; do it more manually to allow some options to take a simple string as their value instead of requiring a reference."^^Change;
+	];

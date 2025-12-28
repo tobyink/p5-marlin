@@ -6,7 +6,7 @@ use utf8;
 package Marlin;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.008000';
+our $VERSION   = '0.009000';
 
 use constant _ATTRS => qw( caller this parents roles attributes strict constructor modifiers inhaled_from short_name is_struct plugins setup_steps_with_plugins );
 use B::Hooks::AtRuntime   qw( at_runtime after_runtime );
