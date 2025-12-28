@@ -44,7 +44,7 @@ sub adjust_setup_steps {
 }
 
 # When our step is called, it is passed the Marlin object and the plugin
-# object.
+# object. Note the Marlin object is the FIRST parameter!
 sub setup_clone_method {
 	my $marlin = shift;
 	my $plugin = shift;
