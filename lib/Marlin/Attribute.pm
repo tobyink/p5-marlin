@@ -246,7 +246,7 @@ sub install_coderef {
 	
 	if ( $target =~ /^my\s+(.+)$/ ) {
 		my $lexname = $1;
-		$me->{_marlin}->_lexport( $lexname, $coderef );
+		$me->{_marlin}->lexport( $lexname, $coderef );
 	}
 	
 	return $me->SUPER::install_coderef( @_ );

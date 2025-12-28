@@ -47,7 +47,7 @@ sub import {
 		my @exportables = @{ $type->exportables };
 		for my $e ( @exportables ) {
 			Eval::TypeTiny::set_subname( $me . '::' . $e->{name}, $e->{code} );
-			$marlin->_lexport( $e->{name}, $e->{code} );
+			$marlin->lexport( $e->{name}, $e->{code} );
 		}
 	}
 }
