@@ -120,3 +120,13 @@
 		item "Marlin::X::Clone is bundled as a demonstration of the extension API (and because it can be useful)."^^Addition;
 		item "Stop using `mkopt` to parse parameters; do it more manually to allow some options to take a simple string as their value instead of requiring a reference."^^Change;
 	].
+
+`Marlin 0.010000 cpan:TOBYINK`
+	issued  2025-12-29;
+	changeset [
+		item "Marlin now provides a rudimentary API for attribute extension modules."^^Change;
+		item "Marlin::XAttribute::Alias is bundled as a demonstration of the extension API (and because it can be useful)."^^Addition;
+		item "Marlin::XAttribute::LocalWriter is bundled as a demonstration of the extension API (and because it can be useful)."^^Addition;
+		item "Marlin::XAttribute::Lvalue is bundled as a demonstration of the extension API (and because it can be useful)."^^Addition;
+		item "Show how easy it is to switch from Class::Tiny to Marlin."^^Documentation;
+	].
