@@ -130,3 +130,19 @@
 		item "Marlin::XAttribute::Lvalue is bundled as a demonstration of the extension API (and because it can be useful)."^^Addition;
 		item "Show how easy it is to switch from Class::Tiny to Marlin."^^Documentation;
 	].
+
+`Marlin 0.011000 cpan:TOBYINK`
+	issued  2026-01-07;
+	changeset [
+		item "Require Type::Tiny 2.010000."^^Packaging;
+		item "Require Class::XSAccessor 0.016000."^^Packaging;
+		item "Changes to work with newest Class::XSAccessor."^^Update;
+		item "Support inheritance from Mouse classes and composing Mouse roles."^^Change;
+		item "Support inheritance from Mite classes and composing Mite roles."^^Change;
+		item "Support inheritance from Class::Tiny classes."^^Change;
+		item "Marlin::XAttribute::Alias no longer forces PP constructors to be generated."^^Change;
+		item "Move some attribute logic from Marlin to Marlin::Attribute making it easier for attribute extensions to override."^^Change;
+		item "Partial support for inheritance from Object::Pad classes (but sometimes it segfaults)."^^Change;
+		item "Marlin::Struct's magical coercion from arrayrefs is now aware of ':Alias'."^^Change;
+		item "Provide MooseX::Marlin and MooX::Marlin to allow Moose and Moo to inherit from Marlin classes and compose Marlin roles."^^Addition;
+	].
