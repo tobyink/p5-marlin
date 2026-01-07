@@ -115,7 +115,7 @@ jobs:
           perl -v
       - name: Install dependencies
         run: |
-          cpanm -n 'https://cpan.metacpan.org/authors/id/T/TO/TOBYINK/Class-XSConstructor-0.016000.tar.gz'
+          cpanm -n 'https://cpan.metacpan.org/authors/id/T/TO/TOBYINK/Class-XSConstructor-0.016001.tar.gz'
           cpanm -n 'https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Test-Deep-1.130.tar.gz'
           cpanm -n App::GhaProve
           cpanm -n --installdeps ./build
