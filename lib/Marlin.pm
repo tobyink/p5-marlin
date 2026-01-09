@@ -603,7 +603,7 @@ sub setup_roles {
 		} @{ $me->roles }
 	) or return $me;
 	
-	my ( $is_moose_role, $is_mouse_role, $is_op_role );
+	my ( $is_moose_role, $is_mouse_role );
 	if ( $INC{'Moose/Role.pm'} ) {
 		$is_moose_role = sub {
 			require Moose::Util;
@@ -619,7 +619,7 @@ sub setup_roles {
 		};
 	}
 
-	my ( @moose_roles, @mouse_roles, @op_roles, @tiny_roles );
+	my ( @moose_roles, @mouse_roles, @tiny_roles );
 	for my $r ( @roles ) {
 		if ( $is_moose_role and $is_moose_role->($r) ) {
 			push @moose_roles, $r;
@@ -758,18 +758,22 @@ sub setup_imports {
 	
 	my @imports;
 	if ( $me->modifiers ) {
-		require Class::Method::Modifiers;
-		push @imports, (
-			before => \&Class::Method::Modifiers::before,
-			after  => \&Class::Method::Modifiers::after,
-			around => \&Class::Method::Modifiers::around,
-			fresh  => \&Class::Method::Modifiers::fresh,
-		);
+		push @imports, $me->_make_modifier_imports;
 	}
 	
 	$me->lexport( @imports );
 	
 	return $me;
+}
+
+sub _make_modifier_imports {
+	require Class::Method::Modifiers;
+	return (
+		before => \&Class::Method::Modifiers::before,
+		after  => \&Class::Method::Modifiers::after,
+		around => \&Class::Method::Modifiers::around,
+		fresh  => \&Class::Method::Modifiers::fresh,
+	);
 }
 
 sub export {

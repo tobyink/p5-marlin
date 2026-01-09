@@ -152,18 +152,6 @@ sub canonicalize_storage {
 	}
 }
 
-# Fix upstream bug!
-sub canonicalize_builder : method {
-	my $me = shift;
-	my $name = $me->{slot};
-	if ( ref $me->{builder} eq 'CODE' ) {
-		my $code = $me->{builder};
-		my $subname = sprintf [ qw/ _build_%s _build_%s / ]->[ $name =~ /\A_/ ? 1 : 0 ], $name;
-		$me->install_coderef( $subname, $code );
-		$me->{builder} = $subname;
-	}
-}
-
 sub inline_access {
 	my $me = shift;
 	my $selfvar = shift || '$_[0]';

@@ -17,7 +17,7 @@
 	:runtime-requirement    [ :on "Type::Tiny 2.010000"^^:CpanId ];
 	:runtime-requirement    [ :on "Type::Tiny::XS"^^:CpanId ];
 	:runtime-requirement    [ :on "Sub::HandlesVia 0.052000"^^:CpanId ];
-	:runtime-requirement    [ :on "Sub::Accessor::Small 1.000002"^^:CpanId ];
+	:runtime-requirement    [ :on "Sub::Accessor::Small 1.000003"^^:CpanId ];
 	:test-requirement       [ :on "Test2::V0"^^:CpanId ];
 	:test-requirement       [ :on "Test2::Tools::Spec"^^:CpanId ];
 	:test-requirement       [ :on "Test2::Require::AuthorTesting"^^:CpanId ];

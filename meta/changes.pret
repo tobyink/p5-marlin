@@ -157,3 +157,12 @@
 		item "Marlin::X::Clone performance improvements."^^Change;
 		item "Check that code is actually compiling before using B::Hooks::AtRuntime, otherwise just run stuff immediately."^^Change;
 	].
+
+`Marlin 0.011002 cpan:TOBYINK`
+	issued  2026-01-09;
+	changeset [
+		item "Require Sub::Accessor::Small 1.000003."^^Packaging;
+		item "Certain setup steps were not running correctly for roles."^^Bugfix;
+		item "The before/after/around keywords exported to roles were ones only suitable for classes; they have been replaced with ones which work for roles."^^Bugfix;
+		item "Update benchmark script; compare some more simple classes too."^^Documentation;
+	].
