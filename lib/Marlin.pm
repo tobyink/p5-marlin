@@ -6,7 +6,7 @@ use utf8;
 package Marlin;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.011002';
+our $VERSION   = '0.012000';
 
 use constant _ATTRS => qw( caller this parents roles attributes strict constructor modifiers inhaled_from short_name is_struct plugins setup_steps_with_plugins delayed );
 use B::Hooks::AtRuntime   ();
@@ -1112,9 +1112,9 @@ L<Class::XSAccessor>, L<Class::XSConstructor>, and L<Type::Tiny::XS>, it
 is usually I<slightly> faster though. Especially if you keep things simple
 and don't use features that force Marlin to fall back to using Pure Perl.
 
-It may not be as fast as classes built with the Perl builtin C<class> syntax
-introduced in Perl v5.38.0, but has more features and supports Perl versions
-as old as v5.8.8. (Some features require v5.12.0+.)
+It may not be as sleek as classes built with the Perl builtin C<class> syntax
+introduced in Perl v5.38.0, but has more features, is often faster, and it
+supports Perl versions as old as v5.8.8. (Some features require v5.12.0+.)
 
 Marlin was created by the developer of L<Type::Tiny> and L<Sub::HandlesVia>
 and integrates with them.

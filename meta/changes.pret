@@ -166,3 +166,12 @@
 		item "The before/after/around keywords exported to roles were ones only suitable for classes; they have been replaced with ones which work for roles."^^Bugfix;
 		item "Update benchmark script; compare some more simple classes too."^^Documentation;
 	].
+
+`Marlin 0.012000 cpan:TOBYINK`
+	issued  2026-01-10;
+	changeset [
+		item "Require Class::XSConstructor 0.01700."^^Packaging;
+		item "Improvements to Class::XSConstructor mean we should never need to generate pure Perl constructors, so stripped out all the code to do that and replaced with a few shims to send the right options to Class::XSConstructor."^^Update;
+		item "Improved inheritance from foreign classes thanks to latest Class::XSConstructor."^^Update;
+		item "Support for BUILDARGS thanks to latest Class::XSConstructor."^^Update;
+	].

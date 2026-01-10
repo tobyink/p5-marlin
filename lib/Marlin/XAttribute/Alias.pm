@@ -5,7 +5,7 @@ use warnings;
 package Marlin::XAttribute::Alias;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.011002';
+our $VERSION   = '0.012000';
 
 use Eval::TypeTiny ();
 use Role::Tiny;
