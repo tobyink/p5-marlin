@@ -93,7 +93,8 @@ sub try_inhale {
 	
 	# Inhale Class::XSConstructor
 	if ( $INC{'Class/XSConstructor.pm'} and my $xscon_meta = do {
-		Class::XSConstructor::get_metadata($k);
+		my $m = Class::XSConstructor::get_metadata($k);
+		$m && defined $m->{package} ? $m : undef;
 	} ) {
 		my @attrs = map {
 			my $attr = $_;
