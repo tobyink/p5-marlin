@@ -419,6 +419,7 @@ sub xs_constructor_args {
 	$opt->{weak_ref} = $me->{weak_ref}  if $me->{weak_ref};
 	
 	$opt->{slot_initializer} = $me->writer if $me->{storage} ne 'HASH';
+	$opt->{slot_initializer} = $me->{slot_initializer} if $me->{slot_initializer};
 	
 	return ( $name . $req => $opt );
 }

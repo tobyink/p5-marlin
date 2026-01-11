@@ -170,7 +170,7 @@
 `Marlin 0.012000 cpan:TOBYINK`
 	issued  2026-01-10;
 	changeset [
-		item "Require Class::XSConstructor 0.01700."^^Packaging;
+		item "Require Class::XSConstructor 0.018001."^^Packaging;
 		item "Improvements to Class::XSConstructor mean we should never need to generate pure Perl constructors, so stripped out all the code to do that and replaced with a few shims to send the right options to Class::XSConstructor."^^Update;
 		item "Marlin now has improved inheritance from foreign classes thanks to latest Class::XSConstructor."^^Documentation;
 		item "Marlin now supports BUILDARGS thanks to latest Class::XSConstructor."^^Documentation;

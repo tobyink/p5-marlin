@@ -93,8 +93,7 @@ sub try_inhale {
 	
 	# Inhale Class::XSConstructor
 	if ( $INC{'Class/XSConstructor.pm'} and my $xscon_meta = do {
-		my $m = Class::XSConstructor::get_metadata($k);
-		$m and defined $m->{package} and $m->{package} eq $k;
+		Class::XSConstructor::get_metadata($k);
 	} ) {
 		my @attrs = map {
 			my $attr = $_;
@@ -721,6 +720,37 @@ sub setup_constructor {
 		$me->strict ? '!!' : (),
 		map( $_->xs_constructor_args, @{ $me->attributes_with_inheritance } ),
 	);
+	
+	# XSConstructor's idea of "foreign" classes is more limited than ours,
+	# so find the real foreign parent, if any. We accept Moo, Moose, Mouse,
+	# etc (anything find_meta can find) as being friendly.
+	no strict 'refs';
+	$me->delay( sub {
+		my $me = shift;
+		my @isa = @{ mro::get_linear_isa($me->this) };
+		shift @isa;  # discard $package itself
+		return unless @isa;
+		
+		my $xscon_meta = Class::XSConstructor::get_metadata($me->this);
+		return unless $xscon_meta->{foreignclass};
+		
+		delete $xscon_meta->{foreignclass};
+		delete $xscon_meta->{foreignconstructor};
+		delete $xscon_meta->{foreignbuildall};
+		delete $xscon_meta->{foreignbuildargs};
+		
+		for my $parent ( @isa ) {
+			next if $me->find_meta( $parent );
+			next if !defined &{"${parent}::new"};
+			$xscon_meta->{foreignclass}         = $parent;
+			$xscon_meta->{foreignconstructor}   = \&{"${parent}::new"};
+			$xscon_meta->{foreignbuildall}      = $parent->can('BUILDALL');
+			$xscon_meta->{foreignbuildargs}     = $parent->can('BUILDARGS');
+			last;
+		}
+		
+		$me->this->XSCON_CLEAR_CONSTRUCTOR_CACHE;
+	} );
 
 	return $me;
 }
