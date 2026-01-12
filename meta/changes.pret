@@ -194,3 +194,10 @@
 		item "Add a test for foreign inheritance."^^Tests;
 		item "Marlin::X::Clone understands about required attributes and undef_tolerant attributes."^^Change;
 	].
+
+`Marlin 0.013001 cpan:TOBYINK`
+	issued  2026-01-12;
+	changeset [
+		item "Bump version of Class::XSConstructor dependency."^^Packaging;
+	].
+
