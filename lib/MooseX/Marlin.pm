@@ -37,7 +37,7 @@ sub import {
 		or Marlin::_croak("Package '$caller' does not use Moose");
 	
 	if ( $caller_meta->isa('Class::MOP::Class') ) {
-		for my $method ( qw/ new does BUILDARGS BUILDALL DEMOLISHALL / ) {	
+		for my $method ( qw/ new does BUILDARGS BUILDALL DEMOLISHALL DESTROY / ) {	
 			if ( not exists &{"${caller}::${method}"} ) {
 				*{"${caller}::${method}"} = \&{"Moose::Object::${method}"};
 			}
