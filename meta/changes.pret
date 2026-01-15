@@ -207,3 +207,16 @@
 		item "Bump version of Class::XSConstructor dependency."^^Packaging;
 		item "Only bother creating a DESTROY method in classes which have (or inherit) a DEMOLISH method. Otherwise, there's no point as it just makes the object lifecycle slower even when implemented in XS."^^Change;
 	].
+
+`Marlin 0.015000 cpan:TOBYINK`
+	issued  2026-01-15;
+	changeset [
+		item "Delay installation of DESTROY until after class has finished compiling; otherwise DEMOLISH methods might still not be defined yet."^^Bugfix;
+		item "Improved tests for DESTROY."^^Tests;
+		item "Eliminated dependency on Module::Runtime."^^Change;
+		item "Eliminated dependency on Class::XSAccessor, though it is still listed as a dependency in META.json because it improves runtime speed when installed. In the future, when Class::XSConstructor is able to provide more accessor-like methods, Class::XSAccessor may be listed as a recommendation rather than a requirement."^^Change;
+		item "Marlin own constructor (for objects blessed into the Marlin class) is now a strict XS constructor. Previously it was a Perl wrapper around the XS constructor; now it uses BUILDARGS to invert that.";
+		item "Significant internal refactoring and code tidying, including dogfooding a lot of the modules."^^Change;
+		item "Constructing a new Marlin::Attribute object with added traits won't cause canonicalize_opts to be called twice."^^Bugfix;
+		item "Factor out common parts of Marlin extensions into Marlin::X, a role for use by people writing Marlin extensions."^^Change;
+	].
