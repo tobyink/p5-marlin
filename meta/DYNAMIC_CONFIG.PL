@@ -1,4 +1,7 @@
-	if ( "$]" >= 5.011002 and "$]" < 5.037002 ) {
+	if ( "$]" < 5.011002 ) {
+		$meta->{prereqs}{runtime}{'requires'}{'namespace::clean'} = 0;
+	}
+	elsif ( "$]" < 5.037002 ) {
 		$meta->{prereqs}{runtime}{'requires'}{'Lexical::Var'} = '0.010';
 	}
 	

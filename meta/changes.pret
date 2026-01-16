@@ -220,3 +220,14 @@
 		item "Constructing a new Marlin::Attribute object with added traits won't cause canonicalize_opts to be called twice."^^Bugfix;
 		item "Factor out common parts of Marlin extensions into Marlin::X, a role for use by people writing Marlin extensions."^^Change;
 	].
+
+`Marlin 0.016000 cpan:TOBYINK`
+	issued  2026-01-16;
+	changeset [
+		item "Use attr=>{extends=>true} or Moose-like +attr to extend an inherited attribute."^^Change;
+		item "Marlin now checks for conflicts between methods and init_args used by different attributes, so you can't (for example) have two attributes that have the same-named reader method."^^Change;
+		item "An attribute that creates lexical accessors in a parent class won't automatically create matching ones in child classes."^^Change;
+		item "Minor changes and reformatting of extended examples to make things cleaner."^^Documentation;
+		item "In Perl versions too old to support lexical subs, use namespace::clean to clean away any non-lexical ones we wanted to be lexical."^^Change;
+		item "Marlin::Attribute sometimes thought its link back to the package it was defined in was called `marlin` and sometimes `_marlin`; fix it to always be the former."^^Bugfix;
+	].
