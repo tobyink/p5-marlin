@@ -193,7 +193,7 @@ sub _make_clone_method {
 			$code->decrease_indent;
 			$code->addf( '}' );
 		}
-		elsif ( !ref $attr->{on_clone} and $attr->{on_clone} =~ /^[\W0-9]\w+$/ ) {
+		elsif ( !ref $attr->{on_clone} and $attr->{on_clone} =~ /^[^\W0-9]\w+$/ ) {
 			$code->addf( '%s ( %s ) {', $if, $attr->inline_predicate('$self') );
 			$code->increase_indent;
 			$code->addf( '( $value, $has_value ) = ( scalar $self->%s( %s, %s ), !!1 );', $attr->{on_clone}, B::perlstring($attr->{slot}), $attr->inline_access('$self') );
