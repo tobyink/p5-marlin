@@ -44,6 +44,7 @@ our $NONE = do {
 sub new {
 	my $class = shift;
 	my $me = do {
+		no warnings 'redefine';
 		local *canonicalize_opts = sub {};
 		$class->SUPER::new( @_ );
 	};
