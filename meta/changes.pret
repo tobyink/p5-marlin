@@ -231,3 +231,11 @@
 		item "In Perl versions too old to support lexical subs, use namespace::clean to clean away any non-lexical ones we wanted to be lexical."^^Change;
 		item "Marlin::Attribute sometimes thought its link back to the package it was defined in was called `marlin` and sometimes `_marlin`; fix it to always be the former."^^Bugfix;
 	].
+
+`Marlin 0.020000 cpan:TOBYINK`
+	issued  2026-01-19;
+	changeset [
+		item "The functionality of Marlin::XAttribute::Alias is now available in Marlin itself without needing an extension."^^Change;
+		item "All other Marlin::X::* and Marlin::XAttribute::* modules are now distributed separately."^^Packaging;
+		item "Eliminated dependency on LV as only Marlin::XAttribute::Lvalue required it."^^Change;
+	].
