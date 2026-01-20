@@ -239,3 +239,10 @@
 		item "All other Marlin::X::* and Marlin::XAttribute::* modules are now distributed separately."^^Packaging;
 		item "Eliminated dependency on LV as only Marlin::XAttribute::Lvalue required it."^^Change;
 	].
+
+`Marlin 0.020001 cpan:TOBYINK`
+	issued  2026-01-20;
+	changeset [
+		item "Avoid redefine warnings from Marlin::Attribute on Perl older than 5.36."^^Bugfix;
+		item "Require latest Class::XSConstructor."^^Update;
+	].
