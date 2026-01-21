@@ -246,3 +246,9 @@
 		item "Avoid redefine warnings from Marlin::Attribute on Perl older than 5.36."^^Bugfix;
 		item "Require latest Class::XSConstructor."^^Update;
 	].
+
+`Marlin 0.020002 cpan:TOBYINK`
+	issued  2026-01-21;
+	changeset [
+		item "Small bugfixes for MooX::Marlin and MooseX::Marlin."^^Bugfix;
+	].
