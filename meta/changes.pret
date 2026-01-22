@@ -252,3 +252,10 @@
 	changeset [
 		item "Small bugfixes for MooX::Marlin and MooseX::Marlin."^^Bugfix;
 	].
+
+`Marlin 0.021000 cpan:TOBYINK`
+	issued  2026-01-22;
+	changeset [
+		item "Eliminated dependency on Clone as Class::XSConstructor and Class::XSReader now have built-in cloning support."^^Packaging;
+		item "clone_on_read, clone_on_write, and clone_bypass options for attributes."^^Addition;
+	].
