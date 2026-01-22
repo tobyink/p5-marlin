@@ -57,8 +57,8 @@ sub new {
 sub make_clone {
 	my $me = shift;
 	
-	defined &Clone::clone or require Clone;
-	my $clone = Clone::clone( $me );
+	defined &Class::XSConstructor::clone or require Class::XSConstructor;
+	my $clone = Class::XSConstructor::clone( $me );
 	
 	# Clone shouldn't clone anything lexical!
 	for my $kind ( @ACCESSOR_KINDS ) {
