@@ -267,3 +267,10 @@
 		item "Require latest Sub::Accessor::Small."^^Packaging;
 		item "chain option for attributes, defaulting to true."^^Addition;
 	].
+
+`Marlin 0.022001 cpan:TOBYINK`
+	issued  2026-01-23;
+	changeset [
+		item "Various minor fixes for Perl 5.8.x."^^Bugfix;
+		item "Skip t/extend-eg.t on Perl 5.8.x for now as it's causing segfaults."^^Bugfix;
+	].

@@ -5,7 +5,7 @@ use warnings;
 package Marlin::Attribute;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.022000';
+our $VERSION   = '0.022001';
 
 BEGIN { our @ISA = 'Sub::Accessor::Small' };
 
