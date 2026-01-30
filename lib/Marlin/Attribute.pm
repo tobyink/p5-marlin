@@ -800,6 +800,7 @@ sub shvxs_info {
 	return if $me->{trigger};
 	return if $me->{storage} ne 'HASH';
 	
+	# How to get an ArrayRef from an object.
 	my %xs_info = (
 		arr_source         => Sub::HandlesVia::XS->ArraySource( 'DEREF_HASH' ),
 		arr_source_string  => $me->{slot},
@@ -811,27 +812,51 @@ sub shvxs_info {
 		$xs_info{arr_source_fallback} = $me->{reader} || $me->{accessor};
 		return unless defined $xs_info{arr_source_fallback};
 	}
+
+	# Strings are found the same way!
+	for my $key ( sort keys %xs_info ) {
+		my ( $stub ) = ( $key =~ /^arr_(.+)$/ ) or next;
 		
-	# Supported type constraints are of the form ArrayRef[Foo].
-	# Really we should be able to support ANY type constraint for most methods
-	# and only care about all this for mutator handlers.
-	if ( $me->{isa} ) {
-		return unless Types::Common::is_Object( $me->{isa} );
-		return unless $me->{isa}->isa('Type::Tiny');
-		return if ref $me->{coerce};
-		my $constraining_type = $me->{isa}->find_constraining_type;
-		if ( $constraining_type->is_parameterized and $constraining_type->parent == Types::Common::ArrayRef ) {
-			return if $constraining_type != $me->{isa};
-			return if @{ $constraining_type->parameters } != 1;
-			my $element_type = $constraining_type->type_parameter;
-			my ( $coderef, $flags ) = Sub::HandlesVia::XS->TypeInfo( $element_type );
-			$xs_info{element_type}        = $flags;
-			$xs_info{element_type_cv}     = $coderef;
-			$xs_info{element_type_tiny}   = $element_type;
-			$xs_info{element_coercion_cv} = $element_type->coercion->compiled_coercion if ( $me->{coerce} and $element_type->has_coercion );
+		if ( exists $xs_info{"arr_$stub"} and not exists $xs_info{"str_$stub"} ) {
+			$xs_info{"str_$stub"} = $xs_info{"arr_$stub"};
 		}
-		elsif ( $constraining_type != Types::Common::Any() ) {
-			return;
+	}
+	
+	# Type constraints in a form Sub::HandlesVia::XS can understand.
+	if ( my $type = $me->{isa} ) {
+		if ( Types::Common::is_Object $type and $type->isa('Type::Tiny') ) {
+			return if ref $me->{coerce};
+			
+			my ( $coderef, $flags ) = Sub::HandlesVia::XS->TypeInfo( $me->{isa} );
+			$xs_info{type}        = $flags;
+			$xs_info{type_cv}     = $coderef;
+			$xs_info{type_tiny}   = $type;
+			$xs_info{coercion_cv} = $type->coercion->compiled_coercion if ( $me->{coerce} and $type->has_coercion );
+			
+			my $constraining_type = $type->find_constraining_type;
+			if ( $constraining_type == Types::Common::ArrayRef ) {
+				$constraining_type = Types::Common::ArrayRef->of( Types::Common::Any );
+			}
+			
+			if ( $constraining_type == $type
+			and  $constraining_type->is_parameterized
+			and  ( $constraining_type->parent == Types::Common::ArrayRef or $constraining_type->parent == Types::Common::HashRef )
+			and  @{ $constraining_type->parameters } == 1 ) {
+				my $element_type = $constraining_type->type_parameter;
+				my ( $coderef, $flags ) = Sub::HandlesVia::XS->TypeInfo( $element_type );
+				$xs_info{element_type}        = $flags;
+				$xs_info{element_type_cv}     = $coderef;
+				$xs_info{element_type_tiny}   = $element_type;
+				$xs_info{element_coercion_cv} = $element_type->coercion->compiled_coercion if ( $me->{coerce} and $element_type->has_coercion );
+			}
+		}
+		else {
+			return if $me->{coerce} && !ref $me->{coerce};
+			
+			my ( $coderef, $flags ) = Sub::HandlesVia::XS->TypeInfo( $me->{isa} );
+			$xs_info{type}        = $flags;
+			$xs_info{type_cv}     = $coderef;
+			$xs_info{coercion_cv} = $me->{coerce} if $me->{coerce};
 		}
 	}
 	elsif ( $me->{coerce} ) {
