@@ -13,7 +13,7 @@ sub code_generator_for_attribute {
 	my ( $self, $target, $attr ) = @_;
 	my $realattr = $self->_attr;
 	
-	my $codegen = $self->SUPER::code_generator_for_attribute();
+	my $codegen = $self->SUPER::code_generator_for_attribute( $target, $attr );
 	$codegen->{xs_info} = $realattr->shvxs_info;
 	$codegen->{target}  = $realattr->{package};
 	return $codegen;
