@@ -5,6 +5,9 @@ use warnings;
 package Marlin::Attribute::SHVToolkit;
 
 BEGIN {
+	our $AUTHORITY = 'cpan:TOBYINK';
+	our $VERSION   = '0.023000';
+	
 	require Sub::HandlesVia::Toolkit::SubAccessorSmall;
 	our @ISA = 'Sub::HandlesVia::Toolkit::SubAccessorSmall';
 };
