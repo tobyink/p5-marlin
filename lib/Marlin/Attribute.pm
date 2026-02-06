@@ -574,9 +574,10 @@ sub install_accessors {
 			$me->inline_predicate if $me->{storage} ne 'NONE';
 			$me->inline_clearer   if $me->{storage} ne 'NONE';
 
-			# We specifically want to suppress cloning
+			# We specifically want to suppress cloning and chaining
 			delete local $me->{clone_on_read};
 			delete local $me->{clone_on_write};
+			delete local $me->{chain};
 
 			require Marlin::Attribute::SHVToolkit;
 			my $SHV = 'Marlin::Attribute::SHVToolkit'->new(
@@ -795,7 +796,7 @@ sub shvxs_info {
 
 	require Sub::HandlesVia;
 	return unless Sub::HandlesVia->can('HAS_SHVXS') && Sub::HandlesVia::HAS_SHVXS();
-	
+
 	# These seem too complicated to handle via direct hashref access.
 	return if $me->{trigger};
 	return if $me->{storage} ne 'HASH';

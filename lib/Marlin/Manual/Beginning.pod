@@ -669,11 +669,172 @@ There are other modules that offer convenient boolean keywords, such
 as L<boolean> and L<builtin>. Alternatively, the numbers 0 for false and
 1 for true also work.
 
+=head2 Polymorphism
+
+This is a big and important part of object-oriented programming. It was
+previously mentioned that because of I<encapsulation>, an object not
+only contains all the data it needs, but all the methods needed to
+operate on that data.
+
+So for example a C<< Local::User >> object might have a C<rename>
+method to change the user's name. But a C<< Local::Video >> object
+might also have a C<rename> method. And so might a C<< Local::Image >>
+object.
+
+B<< Example 15 >>
+
+  # Is it a user, a video, or an image?
+  # We don't care!
+  $object->rename( $new_name );
+
+=head3 Inheritance
+
+Rather than writing separate C<rename> method for videos and images, we
+might define a class C<< Local::Media >> and indicate that videos and
+images are just different kinds of media.
+
+B<< Example 16 >>
+
+  package Local::Media {
+    use Marlin
+      qw( name== );
+    
+    sub rename ( $self, $new_name ) {
+      warn "Renaming to $new_name...";
+      $self->_set_name( $new_name );
+    }
+    
+    sub rename_randomly ( $self ) {
+      my $random_name = ...;
+      $self->rename( $random_name );
+    }
+  }
+  
+  package Local::Video {
+    use Marlin -extends => "Local::Media",
+      qw( height width runtime );
+    
+    sub play ( $self ) {
+      ...;
+    }
+  }
+  
+  package Local::Image {
+    use Marlin -extends => "Local::Media",
+      qw( height width );
+      
+    sub show ( $self ) {
+      ...;
+    }
+  }
+  
+  my $pic = Local::Image->new;
+  my $vid = Local::Video->new;
+  
+  for my $thing ( $pic, $vid ) {
+    $thing->rename_randomly if $thing->isa( 'Local::Media' );
+  }
+
+The C<< Local::Media >> class is called a I<< base class >> or
+I<< parent class >>. C<< Local::Video >> and C<< Local::Image >>
+are both I<< derived classes >> or I<< child classes >> which
+I<< inherit from >> or I<< extend >> the base class.
+
+This example also shows the C<isa> method, a special method which
+all objects in Perl have. It can be used to check if an object
+is an instance of a particular class, and it takes inheritance into
+account.
+
+As you can see in the example, Marlin indicates the base class using
+the C<< -extends >> option. Alternatively you can use the C<< -parent >>,
+C<< -base >>, or C<< -isa >> options. They all do the same thing;
+just use whichever you like the sound of more.
+
+B<< Example 16.1 >>
+
+  package Local::AudioRecording {
+    use Marlin -base => "Local::Media", qw( runtime );
+  }
+  
+  package Local::Sketch {
+    use Marlin -parent => "Local::Image";
+  }
+  
+  package Local::Photograph {
+    use Marlin -isa => "Local::Image";
+  }
+
+=head3 Roles
+
+Sometimes there's not an obvious base class to put shared methods into.
+Like C<< Local::User >> also has a rename method, but it's not a type of
+media. In this case, you can create a special type of package called a
+I<role>. Just use L<Marlin::Role> instead of L<Marlin>.
+
+B<< Example 17 >>
+
+  package Local::Nameable {
+    use Marlin::Role qw( name== );
+    
+    sub rename ( $self, $new_name ) {
+      $self->_set_name( $new_name );
+    }
+    
+    sub rename_randomly ( $self ) {
+      my $random_name = ...;
+      $self->rename( $random_name );
+    }
+  }
+  
+  package Local::User {
+    use Email::Address;
+    use Marlin::Util qw( true false ), -lexical;
+    use Types::Common -types, -lexical;
+    use Marlin
+      -with         => [ "Local::Nameable" ],
+      'username!'   => NonEmptyStr,
+      'password=!'  => NonEmptyStr,
+      'email?'      => StrMatch[ $Email::Address::addr_spec ],
+      '.created'    => {
+        isa           => PositiveOrZeroInt,
+        lazy          => false,
+        default       => sub { return time() },
+      },
+      '.updated='   => {
+        isa           => PositiveOrZeroInt,
+        lazy          => false,
+        default       => sub { return time() },
+      };
+    
+    sub change_password_to ( $self, $new_password ) { ... }
+  }
+  
+  package Local::Media {
+    use Marlin -with => [ "Local::Nameable" ];
+  }
+  
+  package Local::Video {
+    use Marlin -base => "Local::Media",
+      qw( height width runtime );
+    
+    sub play ( $self ) {
+      ...;
+    }
+  }
+  
+  ...;
+
+The C<< Local::Nameable >> package is now a role. A role is like a class,
+except that you cannot create instances of it. It needs to be I<consumed>
+by classes, and you can create instances of those classes.
+
+The C<< -with >> option indicates which roles a class should consume.
+It can also be written as C<< -does >> or C<< -roles >>. Again they all do
+the same thing; just use whichever you like the sound of more.
+
 =head1 SEE ALSO
 
 L<Marlin::Manual::BetterAttributes> - next steps defining attributes.
-
-L<Marlin::Manual::BetterMethods> - next steps defining methods.
 
 L<Marlin>, L<Marlin::Util>.
 
