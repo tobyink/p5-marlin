@@ -1238,6 +1238,11 @@ supports Perl versions as old as v5.8.8. (Some features require v5.12.0+.)
 Marlin was created by the developer of L<Type::Tiny> and L<Sub::HandlesVia>
 and integrates with them.
 
+If you are new to object-oriented Perl, start with
+L<Marlin::Manual::Beginning>. If you already know Perl OO and are
+comfortable with L<Moose> or L<Moo>, start with
+L<Marlin::Manual::QuickStart>.
+
 =head2 Using Marlin
 
 Marlin does all of its work at compile time, so doesn't export keywords like
@@ -1510,6 +1515,7 @@ L<Marlin::Struct>,
 L<Marlin::Util>.
 
 L<Marlin::Manual::Beginning>,
+L<Marlin::Manual::QuickStart>,
 L<Marlin::Manual::BetterAttributes>,
 L<Marlin::Manual::BetterMethods>,
 L<Marlin::Manual::ClassOptions>,
