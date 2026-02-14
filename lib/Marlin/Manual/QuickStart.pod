@@ -20,12 +20,18 @@ If you're coming from Moose/Moo, a useful shortcut is:
 
 =over 4
 
-=item * C<use Marlin> loads your class framework and constructor.
+=item *
 
-=item * attributes are still attributes; Marlin just optimizes for
+C<use Marlin> loads your class framework and constructor.
+
+=item *
+
+attributes are still attributes; Marlin just optimizes for
 common defaults.
 
-=item * familiar concepts like C<extends>, C<with>, type constraints,
+=item *
+
+familiar concepts like C<extends>, C<with>, type constraints,
 defaults, builders, laziness, handles, method modifiers, and strict
 constructors are all there.
 
@@ -65,15 +71,25 @@ The common suffixes are:
 
 =over 4
 
-=item * C<!> - required
+=item *
 
-=item * C<?> - optional, and generates a predicate method (C<has_...>)
+C<!> - required
 
-=item * C<=> - read-mostly (public reader plus private writer)
+=item *
 
-=item * C<==> - read/write (public accessor)
+C<?> - optional, and generates a predicate method (C<has_...>)
 
-=item * C<.> - cannot be passed to the constructor
+=item *
+
+C<=> - read-mostly (public reader plus private writer)
+
+=item *
+
+C<==> - read/write (public accessor)
+
+=item *
+
+C<.> - cannot be passed to the constructor
 
 =back
 
@@ -267,14 +283,22 @@ Notes for Moose/Moo users:
 
 =over 4
 
-=item * You can still use rich type constraints and coderef defaults.
+=item *
 
-=item * You can still use inheritance, roles, delegates, and method modifiers.
+You can still use rich type constraints and coderef defaults.
 
-=item * You can mix terse declarations (symbol suffixes) with explicit
+=item *
+
+You can still use inheritance, roles, delegates, and method modifiers.
+
+=item *
+
+You can mix terse declarations (symbol suffixes) with explicit
 attribute option hashrefs where detail matters.
 
-=item * Most classes become noticeably smaller without losing intent.
+=item *
+
+Most classes become noticeably smaller without losing intent.
 
 =back
 
